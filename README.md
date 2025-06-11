@@ -8,8 +8,8 @@ It detects particle showers produced by very high-energy gamma rays (on the orde
 
 <table>
   <tr>
-    <td><img src="images/magic.jpeg" alt="Immagine 1" width="500"/></td>
-    <td><img src="images/iact.png" alt="Immagine 2" width="300"/></td>
+    <td><img src="images/magic.jpeg" alt="MAGIC Telescope" width="500"/></td>
+    <td><img src="images/iact.png" alt="IACT Method" width="300"/></td>
   </tr>
 </table>
 
@@ -18,7 +18,11 @@ Many gamma ray experiments have to deal with the problem of separating showers p
 The main differences between the two are the following:
 - **Electromagnetic showers**: They can be initiated by photons and develop due combination of processes like pair production and bremsstrahlung.
 
-- **Hadronic showers**: These have more complex descriptions as they involve electromagnetic but also strong interactions, giving rise to different components. It can be divided into an hadronic component and an eletromagnetic one that arise thank to the production of neutral pions which in turn will generate gamma particles.  
+- **Hadronic showers**: These have more complex descriptions as they involve electromagnetic but also strong interactions, giving rise to different components. It can be divided into an hadronic component and an eletromagnetic one that arise thank to the production of neutral pions which in turn will generate gamma particles.
+
+<p align="center">
+  <img src="images/gamma_hadrons.png" alt="Comparison between gamma and hadron signal" width="500"/>
+</p>
 
 The task of separating both types of particles is an occuring problem in the area of ground-based $\gamma$-ray astronomy and is commonly referred to as gamma/hadron separation.  
 To do this the recorded image, after a necessary pre-processing, is parameterized into `Hillas' parameters, mainly a set of second moments which include image shape parameters (length (L) and width (W)) and image orientation parameters, like azwidth (A) and alpha ($\alpha$). Both simulation and experimental studies have shown that γ-ray images are more regular and compact with smaller L and W as compared with their cosmic-ray counterparts and have a well-defined major axis (orientation) which, in the case of γ-rays coming from a point γ-ray source, are oriented closer towards the telescope axis.  
