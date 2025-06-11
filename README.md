@@ -1,3 +1,3 @@
 # Gamma vs Hadron Classification
-This projects will try to classify MAGIC telecope data using differnet strategies as standard ML methods, specifically XGBoost, Multilayers Perceptor and Convolutional Neural Networks comparing their performace.
-The dataset analysed was downloaded from Kaggle at the following link: https://www.kaggle.com/datasets/abhinand05/magic-gamma-telescope-dataset
+This project aims to classify data from the MAGIC Gamma Telescope using different approaches, including standard machine learning methods (specifically XGBoost), as well as deep learning models such as Multilayer Perceptrons and Convolutional Neural Networks.  
+The dataset analyzed was sourced from Kaggle and can be accessed at: https://www.kaggle.com/datasets/abhinand05/magic-gamma-telescope-dataset
