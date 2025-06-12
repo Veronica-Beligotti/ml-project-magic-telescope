@@ -28,8 +28,8 @@ The main differences between the two types of shower are the following:
 The task of distinguishing between these two types of showers is a recurring problem in the area of ground-based $\gamma$-ray astronomy and is commonly referred to as gamma/hadron separation.  
 Typically, in order to achieve this separation the recorded images, after a necessary pre-processing, are parameterized using `Hillas' parameters. These are mainly a set of second moments which include image shape parameters (length (L) and width (W)) and image orientation parameters, like azwidth (A) and alpha ($\alpha$). Both simulation and experimental studies have shown that γ-ray images are more regular and compact with smaller L and W as compared with their cosmic-ray counterparts and have a well-defined major axis which, in the case of γ-rays coming from a point γ-ray source, is oriented closer towards the telescope axis.  
 
-## Dataset Distribution
-The MAGIC dataset used in this project includes exactly these Hillas parameters as features, specifically:
+## Dataset Description
+The MAGIC dataset used in this project contains MC-generated data characterized exactly by these Hillas parameters as features, specifically:
 
 - fLength: major axis of ellipse [mm]
 - fWidth: minor axis of ellipse [mm]
@@ -42,3 +42,18 @@ The MAGIC dataset used in this project includes exactly these Hillas parameters 
 - fAlpha: angle of major axis with vector to origin [deg]
 - fDist: distance from origin to center of ellipse [mm]
 - class: gamma (signal), hadron (background)
+
+Analysing such data it is fundamental to keep in mind that, according to the authors of the dataset, simple classification accuracy is not meaningful in this case, since classifying a background event as signal is worse than classifying a signal event as background. For this reason, to determine which machine learning method performs best, we used the AUC score and looked at the classification results when the probability of accepting a background event as signal is below the 0.05 threshold. 
+The project was developed using the support of Google Colab and Drive in order to be able to wwork with the offered GPU ressoursed.
+
+## The code
+
+### EDA_Magic.ipyng 
+
+After downloading the data, we started to explore the dataset and the features distribution. We cancelled the duplicate and also eliminate all that events presenting a 'Width' equal to zero, this was essential to have a coerent dataframe to use for all the different machine learning methods.
+After the study of the features distribution and their correlation, the features of the dataset were expanded adding four new features:
+
+ - Eccentricity: To measures how much elongated is the event ellipse
+ - Length_Width_Ratio: To quantify the direct proportionality between the major and minor axes
+ - Rooted_Asym: To reduce the impact of extreme values while preserving directional information
+ - Conc_Ratio: To represent the relative difference between the highest and top-two pixel intensities
