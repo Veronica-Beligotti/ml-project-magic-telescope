@@ -48,12 +48,18 @@ The project was developed using the support of Google Colab and Drive in order t
 
 ## The code
 
-### EDA_Magic.ipyng 
+### 1_EDA_Magic.ipyng 
 
-After downloading the data, we started to explore the dataset and the features distribution. We cancelled the duplicate and also eliminate all that events presenting a 'Width' equal to zero, this was essential to have a coerent dataframe to use for all the different machine learning methods.
-After the study of the features distribution and their correlation, the features of the dataset were expanded adding four new features:
+After downloading the data, an initial exploration of the dataset and feature distributions was performed. Duplicate entries were removed, and all events with a 'Width' value equal to zero were eliminated. This preprocessing step was essential to ensure a coherent dataset to use across all the various machine learning methods (especially the CNN).
+
+Following the study of the features distribution and their correlation, the original features set was expanded adding four new features:
 
  - Eccentricity: To measures how much elongated is the event ellipse
  - Length_Width_Ratio: To quantify the direct proportionality between the major and minor axes
  - Rooted_Asym: To reduce the impact of extreme values while preserving directional information
  - Conc_Ratio: To represent the relative difference between the highest and top-two pixel intensities
+
+Ultimately, the importance of these features was investigated to see if it was best to keep them all or to restrict their number. A baseline Random Forest classifier was first trained using all available features in order to establish a reference AUC score.
+Then we applied three different feature selection techniques: Variance Threshold, SelectKBest, Recursive Feature Elimination. For each method the AUC scores was recalculated in order to assess the impact of feature reduction. Checking the results we didn't found a strong differnce between the scores, for this reason all features were kept for the subsequent machine learning training phase.  
+
+### 2_Standard_ML_methods.ipyng 
