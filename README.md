@@ -63,10 +63,15 @@ Ultimately, the importance of these features was investigated to see if it was b
 Then we applied three different feature selection techniques: Variance Threshold, SelectKBest, Recursive Feature Elimination. For each method the AUC scores was recalculated in order to assess the impact of feature reduction. Checking the results we didn't found a strong differnce between the scores, for this reason all features were kept for the subsequent machine learning training phase.  
 
 ### 2_Standard_ML_methods.ipyng 
-Once the new features were established, training was carried out using different machine learning algorithms, including both scale-sensitive and scale-insensitive models. BY analyzing the ROC curves and the corresponding AUC scores, the best performing methods were: Random Forest, XGBoost and Support Vector Machine.
-This result can be attributed to the ability of tthis models to handle non-linear relationships, characterized by noisy and correlated variables which are characteristics typical of Hillas parameters.  
-Then a grid search was performed on all three models to optimize their regularization parameters in order to maximize classification performance in terms of AUC score.The most suitable model turned out to be XGBoost, then a custom classification threshold was selected to maximize the true positive rate while keeping the false positive rate below 0.05.
+
+Once the new features were established, training was carried out using different machine learning algorithms, including both scale-sensitive and scale-insensitive models. By analyzing the ROC curves and the corresponding AUC scores, the best performing methods were: Random Forest, XGBoost and Support Vector Machine.  
+This result can be attributed to the ability of this models to handle non-linear relationships, characterized by noisy and correlated variables which are characteristics typical of Hillas parameters.  
+Then a grid search was performed on all three models to optimize their regularization parameters in order to maximize classification performance in terms of AUC score. The most suitable model turned out to be XGBoost, then a custom classification threshold was selected to maximize the true positive rate while keeping the false positive rate below 5%. 
 The model’s performance was evaluated using precision, recall, and the confusion matrix to ensure effective separation of gamma signals from background events.
+
+### MLP_Magic.ipyng
+
+
 
 
 
