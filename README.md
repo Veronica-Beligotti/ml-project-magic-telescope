@@ -4,7 +4,7 @@ The dataset analyzed was sourced from Kaggle and can be accessed at: https://www
 
 ## MAGIC Telescope
 MAGIC (Major Atmospheric Gamma Imaging Cherenkov telescope), located on the island of La Palma, is currently one of the largest ground-based gamma ray telescope.  
-It detects particle showers produced by very high-energy gamma rays (on the order of TeV), thanks to the use of the Imaging Air Cherenkov Technique (IACT). When gamma rays interact electromagnetically with the Earth's atmosphere, they generate secondary particle which in turn yield a new generation of $\gamma$ rays through bremsstrahlung. Any secondary particle traveling faster than the speed of light in the atmosphere emits Cherenkov radiation, which is captured by the telescope. Throght the detection of this light images, it's possible to reconstruct both the longitudinal and lateral developmente of the electromagnetic shower, as well as determine the arrival direction of the primary gamma ray.  
+It detects particle showers produced by very high-energy gamma rays (on the order of TeV), thanks to the use of the Imaging Air Cherenkov Technique (IACT). When gamma rays interact electromagnetically with the Earth's atmosphere, they generate secondary particle which in turn yield a new generation of $\gamma$ rays through bremsstrahlung. Any secondary particle traveling faster than the speed of light in the atmosphere emits Cherenkov radiation, which is captured by the telescope [1]. Throght the detection of this light images, it's possible to reconstruct both the longitudinal and lateral developmente of the electromagnetic shower, as well as determine the arrival direction of the primary gamma ray.  
 This technique enables the experiment to identify cosmic gamma sources and investigate high-energy astrophysical phenomena such as pulsars, active galactic nuclei, and gamma-ray bursts.  
 
 <table>
@@ -26,7 +26,7 @@ The main differences between the two types of shower are the following:
 </p>
 
 The task of distinguishing between these two types of showers is a recurring problem in the area of ground-based $\gamma$-ray astronomy and is commonly referred to as gamma/hadron separation.  
-Typically, in order to achieve this separation the recorded images, after a necessary pre-processing, are parameterized using `Hillas' parameters. These are mainly a set of second moments which include image shape parameters (length (L) and width (W)) and image orientation parameters, like azwidth (A) and alpha ($\alpha$). Both simulation and experimental studies have shown that γ-ray images are more regular and compact with smaller L and W as compared with their cosmic-ray counterparts and have a well-defined major axis which, in the case of γ-rays coming from a point γ-ray source, is oriented closer towards the telescope axis.  
+Typically, in order to achieve this separation the recorded images, after a necessary pre-processing, are parameterized using `Hillas' parameters. These are mainly a set of second moments which include image shape parameters (length (L) and width (W)) and image orientation parameters, like azwidth (A) and alpha ($\alpha$). Both simulation and experimental studies have shown that γ-ray images are more regular and compact with smaller L and W as compared with their cosmic-ray counterparts and have a well-defined major axis which, in the case of γ-rays coming from a point γ-ray source, is oriented closer towards the telescope axis [2].  
 
 ## Dataset Description
 The MAGIC dataset used in this project contains MC-generated data characterized exactly by these Hillas parameters as features, specifically:
@@ -65,11 +65,17 @@ Then we applied three different feature selection techniques: Variance Threshold
 ### 2_Standard_ML_methods.ipyng 
 
 Once the new features were established, training was carried out using different machine learning algorithms, including both scale-sensitive and scale-insensitive models. By analyzing the ROC curves and the corresponding AUC scores, the best performing methods were: Random Forest, XGBoost and Support Vector Machine.  
-This result can be attributed to the ability of this models to handle non-linear relationships, characterized by noisy and correlated variables which are characteristics typical of Hillas parameters.  
+This result can be attributed to the ability of this models to handle non-linear relationships, characterized by noisy and correlated variables which are characteristics typical precisonof Hillas parameters.  
 Then a grid search was performed on all three models to optimize their regularization parameters in order to maximize classification performance in terms of AUC score. The most suitable model turned out to be XGBoost, then a custom classification threshold was selected to maximize the true positive rate while keeping the false positive rate below 5%. 
 The model’s performance was evaluated using precision, recall, and the confusion matrix to ensure effective separation of gamma signals from background events.
 
-### MLP_Magic.ipyng
+### 3_MLP_Magic.ipyng
+
+With this script, we build and train a Multilayer Perceptron (MLP) to analyse our dataset try to distinguish between hadrons and gammas. A multi-layer perceptron (MLP) is a type of feedforward neural network consisting of multiple layers of neurons which typically use nonlinear activation functions, allowing the network to learn complex patterns in data. For this reason they are significant in machine learning due to their ability to learn nonlinear relationships in data, making them powerful models for tasks such as classification [3].  
+We use the Hyperband optimization algorithm to choose the optimal set of hyperparameters that minimizes the AUC score of the classifier.
+The hyperparameter search was done on the number of layers and relative neurons, on the best learning rate and on the dropout rate of the dropout layers.  
+Then again the best model precision, recall, and the confusion matrix were calculated.
+
 
 
 
