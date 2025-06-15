@@ -76,9 +76,11 @@ We use the Hyperband optimization algorithm to choose the optimal set of hyperpa
 The hyperparameter search was done on the number of layers and relative neurons, on the best learning rate and on the dropout rate of the dropout layers.  
 Then again the best model precision, recall, and the confusion matrix were calculated.
 
+### 4_CNN_Magic.ipyng
 
-
-
+Lastly we tried to approach the problem in a different way: we used the Hillas parameters present in the dataframe to build image of the cosmic ray detected. Particularly we used 'fLength', 'fWidth' and 'fAlpha' to build the base ellipse and its major axis we added two specular gaussian peaks distant 'fAsym' from the elipse center. The color intensity of the elipse and the two peak was calculated using 'fSize', 'fConc' and 'fConc1', than we checked the images created to see the parameters were used correctly.  
+At this point this images were normalized their maximum pixel value and than feed to a convolutional neural network choosen for...
+Also here the Hyperband algorithm was applied to decide which number of neurons, dropout rate and learning rate was best in order to maximize the AUC score. Once the best model was found, the precision, recall, and confusion matrix were estimated in order to make a comparison between the three differnt methods possible.
 
 
 
