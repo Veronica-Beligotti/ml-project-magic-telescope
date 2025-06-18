@@ -79,10 +79,22 @@ Then again the best model precision, recall, and the confusion matrix were calcu
 ### 4_CNN_Magic.ipyng
 
 Lastly we tried to approach the problem in a different way: we used the Hillas parameters present in the dataframe to build image of the cosmic ray detected. Particularly we used 'fLength', 'fWidth' and 'fAlpha' to build the base ellipse and its major axis we added two specular gaussian peaks distant 'fAsym' from the elipse center. The color intensity of the elipse and the two peak was calculated using 'fSize', 'fConc' and 'fConc1', than we checked the images created to see the parameters were used correctly.  
-At this point this images were normalized their maximum pixel value and than feed to a convolutional neural network choosen for...
+At this point this images were normalized their maximum pixel value and than feed to the Convolutional Neural Network (CNN) model choosen for its ability to effectively capture spatial hierarchies and local patterns in data.  
 Also here the Hyperband algorithm was applied to decide which number of neurons, dropout rate and learning rate was best in order to maximize the AUC score. Once the best model was found, the precision, recall, and confusion matrix were estimated in order to make a comparison between the three differnt methods possible.
 
+### Results
 
+In this project we aptempted to solve the problem of gamma and hadron separation using three differnt classifier built using XGBoost, Multilayer Perceptron and Convolutional Neural Networks, respectivly. Following the dataset instructions we serched for the best model able to minimize the number of False Positive without losing too many true signals. To make a fair comparison, we applied two custom classification thresholds: one that ensures the probability of accepting a background event as a signal stays below 5%, and another where this probability is kept at 10%. These two thresholds allowed us to evaluate the models' performance under different levels of sensitivity.  
+
+
+
+<table>
+  <tr>
+    <td><img src="images/magic.jpeg" alt="MAGIC Telescope" width="300"/></td>
+    <td><img src="images/iact.png" alt="IACT Method" width="300"/></td>
+    <td><img src="images/iact.png" alt="IACT Method" width="300"/></td>
+  </tr>
+</table>
 
 
 ## Bibliography 
