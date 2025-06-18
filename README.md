@@ -90,9 +90,9 @@ In this project we aptempted to solve the problem of gamma and hadron separation
 
 <table>
   <tr>
-    <td><img src="images/magic.jpeg" alt="MAGIC Telescope" width="300"/></td>
-    <td><img src="images/iact.png" alt="IACT Method" width="300"/></td>
-    <td><img src="images/iact.png" alt="IACT Method" width="300"/></td>
+    <td><img src="images/confusion_matrix_xgb_thresh_perc_5.png" alt="XGBoost" width="500"/></td>
+    <td><img src="images/confusion_matrix_mlp_64_thresh_perc_5.png" alt="IACT Method" width="500"/></td>
+    <td><img src="images/confusion_matrix_cnn_128_thresh_5_perc.png" alt="IACT Method" width="500"/></td>
   </tr>
 </table>
 
