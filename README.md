@@ -49,7 +49,7 @@ The project was developed using the support of Google Colab and Drive in order t
 
 ## The code
 
-### 1_EDA_Magic.ipyng 
+### 1_EDA_Magic.ipynb 
 
 After downloading the data, an initial exploration of the dataset and feature distributions was performed. Duplicate entries were removed, and all events with a 'Width' value equal to zero were eliminated. This preprocessing step was essential to ensure a coherent dataset to use across all the various machine learning methods, especially the CNN.
 
@@ -63,7 +63,7 @@ Following the study of the feature distributions and their correlation, the orig
 Ultimately, the importance of these features was investigated to see if it was best to keep them all or to restrict their number. A baseline Random Forest classifier was first trained using all available features in order to establish a reference AUC score.
 Then we applied three different feature selection techniques: Variance Threshold, SelectKBest and Recursive Feature Elimination. For each method, the AUC scores were recalculated in order to assess the impact of feature reduction. The results did not show a significant difference in AUC scores; for this reason all features were kept for the subsequent machine learning training phase. 
 
-### 2_Standard_ML_methods.ipyng 
+### 2_Standard_ML_methods.ipynb 
 
 Once the new features were established, training was carried out using different machine learning algorithms, including both scale-sensitive and scale-insensitive models. By analyzing the ROC curves and the corresponding AUC scores, the best performing methods were: Random Forest, XGBoost and Support Vector Machine.  
 
@@ -75,14 +75,14 @@ This result can be attributed to the ability of these models to handle non-linea
 Then a grid search was performed on all three models to optimize their regularization parameters in order to maximize classification performance in terms of AUC score. The most suitable model turned out to be XGBoost, a custom classification threshold was then selected to maximize the true positive rate while keeping the false positive rate below 5%. 
 The model’s performance was evaluated using precision, recall, and the confusion matrix to ensure effective separation of gamma signals from background events.
 
-### 3_MLP_Magic.ipyng
+### 3_MLP_Magic.ipynb
 
 With this script, we build and train a Multilayer Perceptron (MLP) to analyse our dataset trying to distinguish between hadrons and gammas. A multi-layer perceptron (MLP) is a type of feedforward neural network consisting of multiple layers of neurons, which typically use nonlinear activation functions, allowing the network to learn complex patterns in data. For this reason, they are significant in machine learning due to their ability to learn nonlinear relationships in data, making them powerful models for tasks such as classification [3].  
 We used the Hyperband optimization algorithm to choose the optimal set of hyperparameters that minimizes the AUC score of the classifier.
 The hyperparameter search was done on the number of layers and relative neurons, on the best learning rate and on the dropout rate of the dropout layers.  
 Then again, the best model precision, recall, and the confusion matrix were calculated.
 
-### 4_CNN_Magic.ipyng
+### 4_CNN_Magic.ipynb
 
 Lastly, we tried to approach the problem differently: we used the Hillas parameters present in the dataframe to build an image of the cosmic ray detected. In particular, we used 'fLength', 'fWidth' and 'fAlpha' to build the base ellipse and its major axis. We added two symmetrical Gaussian peaks located at a distance of 'fAsym' from the ellipse center. The color intensity of the ellipse and the two peaks was calculated using 'fSize', 'fConc' and 'fConc1', then we checked the images created to see if the parameters were used correctly.  
 
