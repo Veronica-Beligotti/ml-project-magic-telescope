@@ -87,12 +87,11 @@ Also here the Hyperband algorithm was applied to decide which number of neurons,
 In this project we aptempted to solve the problem of gamma and hadron separation using three differnt classifier built using XGBoost, Multilayer Perceptron and Convolutional Neural Networks, respectivly. Following the dataset instructions we serched for the best model able to minimize the number of False Positive without losing too many true signals. To make a fair comparison, we applied two custom classification thresholds: one that ensures the probability of accepting a background event as a signal stays below 5%, and another where this probability is kept at 10%. These two thresholds allowed us to evaluate the models' performance under different levels of sensitivity.  
 
 
-
 <table>
   <tr>
-    <td><img src="images/confusion_matrix_xgb_thresh_perc_5.png" alt="XGBoost" width="500"/></td>
-    <td><img src="images/confusion_matrix_mlp_64_thresh_perc_5.png" alt="IACT Method" width="500"/></td>
-    <td><img src="images/confusion_matrix_cnn_128_thresh_5_perc.png" alt="IACT Method" width="500"/></td>
+    <td><img src="images/confusion_matrix_xgb_thresh_perc_10.png" alt="XGBoost" width="300"/></td>
+    <td><img src="images/confusion_matrix_mlp_64_thresh_perc_10.png" alt="IACT Method" width="300"/></td>
+    <td><img src="images/confusion_matrix_cnn_128_thresh_10_perc.png" alt="IACT Method" width="300"/></td>
   </tr>
 </table>
 
