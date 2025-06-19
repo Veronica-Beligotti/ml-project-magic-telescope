@@ -26,7 +26,7 @@ The main differences between the two types of showers are the following:
 </p>
 
 The task of distinguishing between these two types of showers is a recurring problem in the area of ground-based $\gamma$-ray astronomy and is commonly referred to as gamma/hadron separation.  
-Typically, to achieve this separation the recorded images, after a necessary preprocessing, are parameterized using Hillas parameters. These are mainly a set of second moments which include image shape parameters (length (L) and width (W)) and image orientation parameters, like azwidth (A) and alpha ($\alpha$). Both simulation and experimental studies have shown that γ-ray images are more regular and compact with smaller L and W as compared with their hadronic counterparts and have a well-defined major axis. In the case of γ-rays coming from a point γ-ray source, this major axis is oriented closer towards the telescope axis [2]. 
+Typically, to achieve this separation the recorded images, after a necessary preprocessing, are parameterized using Hillas parameters. These are mainly a set of second moments which include image shape parameters (length (L) and width (W)) and image orientation parameters, like azwidth (A) and alpha ($\alpha$). Both simulation and experimental studies have shown that γ-ray images are more regular and compact with smaller L and W as compared with their hadronic counterparts and have a well-defined major axis. Moreover, in the case of γ-rays coming from a point γ-ray source, this major axis is oriented closer towards the telescope axis [2]. 
 
 ## Dataset Description
 The MAGIC dataset used in this project contains MC-generated data characterized exactly by these Hillas parameters as features, specifically:
