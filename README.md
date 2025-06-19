@@ -169,6 +169,6 @@ Nevertheless, there is still room for improvement across all the models presente
 ## Bibliography 
 
 [1] Maurizio Spurio, " Probes of Multimessenger Astrophysics - Charged cosmic rays, neutrinos, γ-rays and gravitational waves", Springer (2018).  
-[2] Sofia Llàcer Caro, “Gamma-hadron separation with the upcoming Cherenkov Telescope Array”, Bachelor’s Thesis, University of Groningen (2023).  
+[2] arXiv:astro-ph/0109476v1
 [3] Multilayer Perceptrons in Machine Learning: A Comprehensive Guide. https://www.datacamp.com/tutorial/multilayer-perceptrons-in-machine-learning  
 [4] https://medium.com/@heyamit10/hyperband-hyperparameter-optimization-d7bd66faa8e8 and arXiv:1603.06560
