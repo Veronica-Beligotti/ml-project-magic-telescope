@@ -91,7 +91,9 @@ Lastly, we tried to approach the problem differently: we used the Hillas paramet
 </p>
 
 At this point, these images were normalized to their maximum pixel value and then fed to the Convolutional Neural Network (CNN) model chosen for its ability to effectively capture spatial hierarchies and local patterns in data.  
-Also here the Hyperband algorithm was applied to decide which number of neurons, dropout rate and learning rate was best in order to maximize the AUC score. Once the best model was found, the precision, recall, and confusion matrix were estimated in order to make a comparison between the three different methods possible.
+Also here the Hyperband algorithm was applied to decide which number of neurons, dropout rate and learning rate was best in order to maximize the AUC score. Once the best model was found, the precision, recall, and confusion matrix were estimated in order to make a comparison between the three different methods possible.  
+
+Both the MLP and the CNN tuner results can be download [here](https://drive.google.com/drive/folders/1nCyL1IJ8EObaw9-AC2dTRCmDVt7AW5m1?usp=sharing)  
 
 ## Results
 
