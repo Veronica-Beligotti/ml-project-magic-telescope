@@ -19,7 +19,7 @@ Many gamma ray experiments have to deal with the problem of separating showers p
 The main differences between the two types of showers are the following:
 - **Electromagnetic showers**: Initiated by photons and developed through a combination of processes such as pair production and bremsstrahlung.
 
-- **Hadronic showers**: More complex in nature, as they involve not only electromagnetic but also strong interactions, resulting in multiple components. Each hadronic shower includes a hadronic component and an electromagnetic component, the latter arising from the production of neutral pions, which in turn generate gamma particles.
+- **Hadronic showers**: More complex in nature, as they involve not only electromagnetic but also strong interactions, resulting in multiple components. Each hadronic shower includes a hadronic component and an electromagnetic one, the latter arising from the production of neutral pions, which in turn generate gamma particles.
 
 <p align="center">
   <img src="images/gamma_hadrons.png" alt="Comparison between gamma and hadron signal" width="500"/>
