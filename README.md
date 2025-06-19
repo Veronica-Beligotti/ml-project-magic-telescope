@@ -43,22 +43,22 @@ The MAGIC dataset used in this project contains MC-generated data characterized 
 - fDist: distance from origin to center of ellipse [mm]
 - class: gamma (signal), hadron (background)
 
-Analysing such data, it is fundamental to keep in mind that, according to the authors of the dataset, simple classification accuracy is not meaningful in this case, since classifying a background event as signal is worse than classifying a signal event as background. For this reason, to determine which machine learning method performs best, we used the AUC score and looked at the classification results when the probability of accepting a background event as a signal is below the certain threshold. 
-The project was developed using the support of Google Colab and Drive in order to be able to work with the offered GPU resources.
+Analysing such data, it is fundamental to keep in mind that, according to the authors of the dataset, simple classification accuracy is not meaningful in this case, since classifying a background event as signal is worse than classifying a signal event as background. For this reason, to determine which machine learning method performs best, we used the AUC score and looked at the classification results when the probability of accepting a background event as a signal is below a certain threshold. 
+The project was developed using the support of Google Colab and Google Drive in order to be able to work with the offered GPU resources.
 
 
 ## The code
 
 ### 1_EDA_Magic.ipynb 
 
-After downloading the data, an initial exploration of the dataset and feature distributions was performed. Duplicate entries were removed, and all events with a 'Width' value equal to zero were eliminated. This preprocessing step was essential to ensure a coherent dataset to use across all the various machine learning methods, especially the CNN.
+After downloading the data, an initial exploration of the dataset and feature distributions was performed. Duplicate entries were removed, and all events with a 'Width' value equal to zero were eliminated. This preprocessing step was essential to ensure a coherent dataset to use across all the various machine learning methods, especially the CNN, where events with null Width would not have allowed for proper image generation.
 
-Following the study of the feature distributions and their correlation, the original features set was expanded by adding four new features:
+Following the study of the feature distributions and their correlation, the original features set was expanded by adding four new ones:
 
  - Eccentricity: To measure how much the event ellipse is elongated
  - Length_Width_Ratio: To quantify the direct proportionality between the major and minor axes
  - Rooted_Asym: To reduce the impact of extreme values while preserving directional information
- - Conc_Ratio: To represent the relative difference between the highest and top two pixel intensities
+ - Conc_Ratio: To represent the ratio between the highest top two pixel intensities
 
 Ultimately, the importance of these features was investigated to see if it was best to keep them all or to restrict their number. A baseline Random Forest classifier was first trained using all available features in order to establish a reference AUC score.
 Then we applied three different feature selection techniques: Variance Threshold, SelectKBest and Recursive Feature Elimination. For each method, the AUC scores were recalculated in order to assess the impact of feature reduction. The results did not show a significant difference in AUC scores; for this reason all features were kept for the subsequent machine learning training phase. 
@@ -66,13 +66,13 @@ Then we applied three different feature selection techniques: Variance Threshold
 ### 2_Standard_ML_methods.ipynb 
 
 Once the new features were established, training was carried out using different machine learning algorithms, including both scale-sensitive and scale-insensitive models. By analyzing the ROC curves and the corresponding AUC scores, the best performing methods were: Random Forest, XGBoost and Support Vector Machine.  
+This result can be attributed to the ability of these models to handle non-linear relationships, characterized by noisy and correlated variables, which are characteristics typical of Hillas parameters.   
 
 <p align="center">
   <img src="/images/ROC_simple_models.png" width="700">
 </p>
 
-This result can be attributed to the ability of these models to handle non-linear relationships, characterized by noisy and correlated variables, which are characteristics typical of Hillas parameters.   
-Then a grid search was performed on all three models to optimize their regularization parameters in order to maximize classification performance in terms of AUC score. The most suitable model turned out to be XGBoost, a custom classification threshold was then selected to maximize the true positive rate while keeping the false positive rate below 5%. 
+Then a grid search was performed on all three models to optimize their regularization parameters in order to maximize classification performance in terms of AUC score. The most suitable model turned out to be XGBoost, custom classification thresholds were then selected to maximize the true positive rate while keeping the false positive rate below 5% or 10%, depending on the desired level of sensitivity.
 The model’s performance was evaluated using precision, recall, and the confusion matrix to ensure effective separation of gamma signals from background events.
 
 ### 3_MLP_Magic.ipynb
@@ -80,24 +80,24 @@ The model’s performance was evaluated using precision, recall, and the confusi
 With this script, we build and train a Multilayer Perceptron (MLP) to analyse our dataset trying to distinguish between hadrons and gammas. A multi-layer perceptron (MLP) is a type of feedforward neural network consisting of multiple layers of neurons, which typically use nonlinear activation functions, allowing the network to learn complex patterns in data. For this reason, they are significant in machine learning due to their ability to learn nonlinear relationships in data, making them powerful models for tasks such as classification [3].  
 We used the Hyperband optimization algorithm to choose the optimal set of hyperparameters that minimizes the AUC score of the classifier.
 The hyperparameter search was done on the number of layers and relative neurons, on the best learning rate and on the dropout rate of the dropout layers.  
-Then again, the best model precision, recall, and the confusion matrix were calculated.
+Then again, after applying the custom thresholds, the best model precision, recall, and the confusion matrix were calculated.
 
 ### 4_CNN_Magic.ipynb
 
-Lastly, we tried to approach the problem differently: we used the Hillas parameters present in the dataframe to build an image of the cosmic ray detected. In particular, we used 'fLength', 'fWidth' and 'fAlpha' to build the base ellipse and its major axis. We added two symmetrical Gaussian peaks located at a distance of 'fAsym' from the ellipse center. The color intensity of the ellipse and the two peaks was calculated using 'fSize', 'fConc' and 'fConc1', then we checked the images created to see if the parameters were used correctly.  
+Lastly, we tried to approach the problem differently: the Hillas parameters present in the dataframe were employed to build an image of the cosmic ray detected. In particular, we used 'fLength', 'fWidth' and 'fAlpha' to define the base ellipse, while two symmetrical Gaussian peaks were added along the major axis at a distance of 'fAsym' from the ellipse center. The color intensity of the ellipse and the two peaks was calculated using 'fSize', 'fConc' and 'fConc1', then we checked the images created to see if the parameters were used correctly.  
 
 <p align="center">
   <img src="/images/artificial_image.png" width="500">
 </p>
 
-At this point, these images were normalized to their maximum pixel value and then fed to the Convolutional Neural Network (CNN) model chosen for its ability to effectively capture spatial hierarchies and local patterns in data.  
-Also here the Hyperband algorithm was applied to decide which number of neurons, dropout rate and learning rate was best in order to maximize the AUC score. Once the best model was found, the precision, recall, and confusion matrix were estimated in order to make a comparison between the three different methods possible.  
+At this point, these images were normalized using their maximum pixel value and then fed to the Convolutional Neural Network (CNN) model chosen for its ability to effectively capture spatial hierarchies and local patterns in data.  
+Also here the Hyperband algorithm was applied to decide the optimal number of neurons, dropout rate, and learning rate for maximizing the AUC score. Once the best model was found, the precision, recall, and confusion matrix were estimated in order to enable a comparison across the three different methods.
 
 Both the MLP and the CNN tuner results can be download [here](https://drive.google.com/drive/folders/1nCyL1IJ8EObaw9-AC2dTRCmDVt7AW5m1?usp=sharing)  
 
 ## Results
 
-In this project we attempted to solve the problem of gamma and hadron separation using three different classifiers built using XGBoost, Multilayer Perceptron and Convolutional Neural Networks, respectively. Following the dataset instructions we looked for the best model able to minimize the number of False Positives without losing too many true signals. To ensure a fair comparison, we applied two custom classification thresholds: one where the probability of misclassifying a background event as a gamma is kept below 5%, and another where this probability is allowed up to 10%. These thresholds allowed us to evaluate the models' performance under different levels of sensitivity.  
+In this project we attempted to solve the problem of gamma and hadron separation using three different classifiers built using XGBoost, Multilayer Perceptron and Convolutional Neural Networks, respectively. Following the dataset instructions we looked for the best model able to minimize the number of False Positives without losing too many true signals. To ensure a fair comparison, we applied two custom classification thresholds: one where the probability of misclassifying a background event as a gamma is kept below 5%, and another where this probability is raised to 10%. These thresholds allowed us to evaluate the models' performance under different levels of sensitivity.  
 
 <table align="center">
   <thead>
@@ -142,7 +142,7 @@ In this project we attempted to solve the problem of gamma and hadron separation
   </tbody>
 </table>
 
-When analyzing the results at the 10% threshold, XGBoost emerged as the best-performing model. It achieved the highest AUC score and managed to keep the false positive rate low without losing too many gamma events. The MLP also performed quite well, but it required significantly more training time compared to the XGB and still did not manage to match its performance. Finally, the CNN was found to be the worst model. This is likely due to the fact that the images it analyses were artificially generated and contained less detailed information compared to the tabular data. Having more details about the spatial distribution of the key pixels might improve its performance.
+When analyzing the results at the 10% threshold, XGBoost emerged as the best-performing model. It achieved the highest AUC score and managed to keep the false positive rate low without losing too many gamma events. The MLP also performed quite well, but it required significantly more training time compared to the XGB and still did not manage to match its performance. Finally, the CNN was found to be the worst model. This is likely due to the fact that the images it analyses were artificially generated and contained less detailed information compared to the tabular data. Having a clearer representation of the spatial distribution of the key pixels might improve its performance.
 
 <table>
   <tr>
@@ -164,7 +164,7 @@ The outputs are similar also selecting a more stringent threshold at 5%: the bes
 
 ## Conclusions
 This project demonstrates how both traditional machine learning and deep learning techniques can be applied to the challenging task of gamma/hadron separation in ground-based gamma ray astronomy. Among the tested models, XGBoost emerged as the best one, not only for its strong perfomance but also for its relatively short training time. The MLP also showed promising results, although at a higher computational cost, while the CNN, despite its potential for image-based analysis, underperformed—likely due to limitations in the way input images were generated from tabular data.
-Nevertheless, there is still room for improvement across all the models presented, where more suitable architectures and hyperparameter configurations could be further explored. In this work a selection was made regarding which models to consider, but given the incredibly large number of existing classifiers, there are certainly other approaches that could be used and studied in depth.
+Nevertheless, there is still room for improvement across all the models presented, where more suitable architectures and hyperparameter configurations could be further explored. In this work a selection was made regarding which models to consider but, given the incredibly large number of existing classifiers, there are certainly other approaches that could be used and studied in depth.
 
 ## Bibliography 
 
