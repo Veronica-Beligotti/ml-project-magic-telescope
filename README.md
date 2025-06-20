@@ -61,7 +61,7 @@ Following the study of the feature distributions and their correlation, the orig
  - Conc_Ratio: To represent the ratio between the highest top two pixel intensities
 
 Ultimately, the importance of these features was investigated to see if it was best to keep them all or to restrict their number. A baseline Random Forest classifier was first trained using all available features in order to establish a reference AUC score.
-Then we applied three different feature selection techniques: Variance Threshold, SelectKBest and Recursive Feature Elimination. For each method, the AUC scores were recalculated in order to assess the impact of feature reduction. The results did not show a significant difference in AUC scores; for this reason all features were kept for the subsequent machine learning training phase. 
+Then we applied three different feature selection techniques: Variance Threshold, SelectKBest and Recursive Feature Elimination. For each method, the AUC scores were recalculated in order to assess the impact of feature reduction. As the results did not show a significant difference in AUC scores, all features were preserved for the subsequent machine learning phase, also considering that deep learning models can potentially capture complex and non-obvious feature relationships.
 
 ### 2_Standard_ML_methods.ipynb 
 
@@ -72,12 +72,13 @@ This result can be attributed to the ability of these models to handle non-linea
   <img src="/images/ROC_simple_models.png" width="700">
 </p>
 
-Then a grid search was performed on all three models to optimize their regularization parameters in order to maximize classification performance in terms of AUC score. The most suitable model turned out to be XGBoost, custom classification thresholds were then selected to maximize the true positive rate while keeping the false positive rate below 5% or 10%, depending on the desired level of sensitivity.
+Then a grid search was performed on all three models to optimize their regularization parameters in order to maximize classification performance in terms of AUC score. The most suitable model turned out to be XGBoost.  
+Custom classification thresholds were then selected to maximize the number of true positives while keeping the false positive rate below 5% or 10%, depending on the desired level of sensitivity.
 The model’s performance was evaluated using precision, recall, and the confusion matrix to ensure effective separation of gamma signals from background events.
 
 ### 3_MLP_Magic.ipynb
 
-With this script, we build and train a Multilayer Perceptron (MLP) to analyse our dataset trying to distinguish between hadrons and gammas. A multi-layer perceptron (MLP) is a type of feedforward neural network consisting of multiple layers of neurons, which typically use nonlinear activation functions, allowing the network to learn complex patterns in data. For this reason, they are significant in machine learning due to their ability to learn nonlinear relationships in data, making them powerful models for tasks such as classification [3].  
+With this script, we build and train a Multilayer Perceptron (MLP) to analyse our dataset trying to distinguish between hadrons and gammas. A multi-layer perceptron (MLP) is a type of feedforward neural network consisting of multiple layers of neurons, which typically use nonlinear activation functions, allowing the network to learn complex patterns in data. For this reason, they are significant in machine learning due to their ability to model nonlinear relationships in data, making them powerful tools for tasks such as classification [3].  
 We used the Hyperband optimization algorithm to choose the optimal set of hyperparameters that minimizes the AUC score of the classifier.
 The hyperparameter search was done on the number of layers and relative neurons, on the best learning rate and on the dropout rate of the dropout layers.  
 Then again, after applying the custom thresholds, the best model precision, recall, and the confusion matrix were calculated.
@@ -163,7 +164,7 @@ The outputs are similar also selecting a more stringent threshold at 5%: the bes
 </table>
 
 ## Conclusions
-This project demonstrates how both traditional machine learning and deep learning techniques can be applied to the challenging task of gamma/hadron separation in ground-based gamma ray astronomy. Among the tested models, XGBoost emerged as the best one, not only for its strong perfomance but also for its relatively short training time. The MLP also showed promising results, although at a higher computational cost, while the CNN, despite its potential for image-based analysis, underperformed—likely due to limitations in the way input images were generated from tabular data.
+This project demonstrates how both traditional machine learning and deep learning techniques can be applied to the challenging task of gamma/hadron separation in ground-based gamma ray astronomy. Among the tested models, XGBoost emerged as the best one, not only for its strong perfomance but also for its relatively short training time. The MLP also showed promising results, although at a higher computational cost, while the CNN, despite its potential for image-based analysis, underperformed—likely due to limitations in the way input images were generated from tabular data.  
 Nevertheless, there is still room for improvement across all the models presented, where more suitable architectures and hyperparameter configurations could be further explored. In this work a selection was made regarding which models to consider but, given the incredibly large number of existing classifiers, there are certainly other approaches that could be used and studied in depth.
 
 ## Bibliography 
