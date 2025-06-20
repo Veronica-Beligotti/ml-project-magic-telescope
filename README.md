@@ -98,7 +98,7 @@ Both the MLP and the CNN tuner results can be download [here](https://drive.goog
 
 ## Results
 
-In this project we attempted to solve the problem of gamma and hadron separation using three different classifiers built using XGBoost, Multilayer Perceptron and Convolutional Neural Networks, respectively. Following the dataset instructions we looked for the best model able to minimize the number of False Positives without losing too many true signals. To ensure a fair comparison, we applied two custom classification thresholds: one where the probability of misclassifying a background event as a gamma is kept below 5%, and another where this probability is raised to 10%. These thresholds allowed us to evaluate the models' performance under different levels of sensitivity.  
+In this project we attempted to solve the problem of gamma and hadron separation using three different classifiers built using XGBoost, Multilayer Perceptron and Convolutional Neural Networks, respectively. Following the dataset instructions we looked for the best model able to minimize the number of false positives without losing too many true signals. To ensure a fair comparison, we applied two custom classification thresholds: one where the probability of misclassifying a background event as a gamma is kept below 5%, and another where this probability is raised to 10%. These thresholds allowed us to evaluate the models' performance under different levels of sensitivity.  
 
 <table align="center">
   <thead>
